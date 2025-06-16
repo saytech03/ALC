@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to ALC</title>
+  <style>
+    .header {
+        text-align: center;
+        color: #2c3e50;
+    }
+    .logo {
+        max-width: 200px;
+        margin: 20px auto;
+    }
+    .content {
+        line-height: 1.6;
+        font-size: 16px;
+    }
+    .membership-id {
+        font-weight: bold;
+        color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>ART LAW COMMUNION</h1>
+</div>
+
+<div class="content">
+  <p>Welcome to the Art Law Communion's online community and thank you for subscribing!</p>
+
+  <center>
+    <img class="logo" src="https://i.ibb.co/NgwJG2zG/alc-logo.jpg" alt="ALC Logo">
+  </center>
+
+  <p>We aim to promote deeper understanding of art law through academic exploration, advocacy and collaboration,
+    while empowering the public to engage with critical legal issues impacting artists, collectors, cultural
+    institutions and the global art market.</p>
+
+  <p>This is a space for deliberation and knowledge sharing to equip the next generation of legal professionals
+    with the expertise and insight to navigate and shape the evolving landscape of art law in India, where
+    context-specific legal challenges to the same remain underrepresented in mainstream discourse.</p>
+
+  <p>Just so you do not miss out on new blogposts or our events dealing with art and the law to ramp up your
+    skills and knowledge, please add us to your address book to ensure you receive our emails in your primary inbox.</p>
+
+  <p>Your membership ID: <span class="membership-id" th:text="${membershipId}">ALCWBX123</span></p>
+
+  <p>Now that you are all signed up, here are some quick links to some of our resources:</p>
+  <ul>
+    <li>Visit our substack page <a href="https://substack.com/@artlawcommunion">here</a> to explore interesting reads on art law in India and beyond.</li>
+    <li>Follow us on <a href="https://www.instagram.com/artlawcommunion?utm_source=qr&igsh=ZGpwZ2lzbzZyejhp">Instagram</a>, <a href="https://www.facebook.com/share/1FDZVMAwPh/">Facebook</a> and <a href="https://www.linkedin.com/company/art-law-communion/">LinkedIn</a> to read posts
+      on materials, elements, latest news and case law updates relating to art law.</li>
+  </ul>
+
+  <p>Have fun!</p>
+  <p>The Art Law Communion Team</p>
+</div>
+</body>
+</html>
