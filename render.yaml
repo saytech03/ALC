@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: alc-backend
+    env: java
+    build:
+      command: "./mvnw clean package -DskipTests"
+      publish: "target/*.jar"
+    healthCheckPath: /actuator/health
