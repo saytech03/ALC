@@ -4,6 +4,8 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw .
 COPY pom.xml .
+# 2. Make mvnw executable
+RUN chmod +x mvnw  # <-- THIS IS THE CRITICAL FIX
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
