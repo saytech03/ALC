@@ -4,25 +4,106 @@
   <meta charset="UTF-8">
   <title>Email Verification</title>
   <style>
+    /* Global Reset & Base */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #333;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    /* Header with logo */
+    .header {
+      background: #2c3e50;
+      padding: 20px;
+      text-align: center;
+    }
+    .header img {
+      max-width: 140px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #ecf0f1;
+      font-weight: normal;
+    }
+    /* Main content */
+    .content {
+      padding: 30px 20px;
+    }
+    .content p {
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+    /* OTP box */
     .otp-box {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #f0f0f0;
-        border-radius: 5px;
-        font-size: 24px;
-        font-weight: bold;
-        margin: 20px 0;
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #ecf0f1;
+      border: 2px dashed #bdc3c7;
+      border-radius: 6px;
+      font-size: 26px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin: 20px 0;
+      color: #2c3e50;
+    }
+    /* Footer */
+    .footer {
+      background: #ecf0f1;
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+    /* Responsive */
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: 20px;
+      }
+      .otp-box {
+        padding: 12px 24px;
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-<p>Hi there,</p>
-<p>Thank you for signing up to our community.</p>
-<p>You are just one step away from joining our community and accessing our resources!</p>
-<p>Here's your OTP to gain access to huge range of contents.</p>
+<div class="container">
+  <!-- Header with logo -->
+  <div class="header">
+    <img src="https://iili.io/FAdFZjp.png" alt="ALC Logo">
+    <h2>Email Verification</h2>
+  </div>
 
-<div class="otp-box" th:text="${otp}">123456</div>
+  <!-- Main message -->
+  <div class="content">
+    <p>Hi there,</p>
+    <p>Thank you for signing up to the Art Law Communion community!</p>
+    <p>You’re one step away from accessing our exclusive resources. Use the OTP below to verify your email address:</p>
 
-<p>Best wishes,<br>The Art Law Communion Team</p>
+    <div class="otp-box" th:text="${otp}">123456</div>
+
+    <p>If you did not request this code, please ignore this email.</p>
+    <p>Best wishes,<br>The Art Law Communion Team</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2025 Art Law Communion • <a href="https://artlawcommunion.org" style="color: #7f8c8d; text-decoration: none;">Visit our website</a>
+  </div>
+</div>
 </body>
 </html>

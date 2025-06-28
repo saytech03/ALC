@@ -2,6 +2,7 @@ package com.alcw.service;
 
 
 import com.alcw.dto.LoginRequest;
+import com.alcw.dto.PatronLoginRequest;
 import com.alcw.dto.UserDTO;
 import com.alcw.model.User;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public User loginUser(LoginRequest loginRequest) {
         return userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+    }
+
+    @Override
+    public User loginWithPatronId(PatronLoginRequest request) {
+        return userService.loginWithPatronId(request.getPatronId(), request.getPassword());
     }
 }
