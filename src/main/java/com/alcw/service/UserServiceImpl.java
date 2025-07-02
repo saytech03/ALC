@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final OTPService otpService;
     private final EmailService emailService;
     private final Cloudinary cloudinary;
+    private final SequenceGeneratorService sequenceGeneratorService;
 
 
     @Override
@@ -55,7 +56,11 @@ public class UserServiceImpl implements UserService {
 
         otpService.validateOTP(email, otp);
         user.setVerified(true);
-        user.setMembershipId("ALCWB" + user.getId().substring(0, 4).toUpperCase());
+
+        // Get next sequential number
+        int nextNumber = sequenceGeneratorService.generateSequence("user_sequence");
+        String membershipId = String.format("ALCWB%04d", nextNumber);
+        user.setMembershipId(membershipId);
 
         User updatedUser = userRepository.save(user);
         emailService.sendWelcomeEmail(updatedUser);
@@ -78,6 +83,23 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    @Override
+    public User loginWithPatronId(String patronId, String password) {
+        User user = userRepository.findByMembershipId(patronId)
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid Patron ID"));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid password");
+        }
+
+        if (!user.isVerified()) {
+            throw new InvalidCredentialsException("Account not verified");
+        }
+
+        return user;
+    }
+
 
     @Override
     public User getUserByEmail(String email) {

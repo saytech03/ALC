@@ -4,58 +4,146 @@
   <meta charset="UTF-8">
   <title>Welcome to ALC</title>
   <style>
-    .header {
-        text-align: center;
-        color: #2c3e50;
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      font-family: 'Arial', sans-serif;
+      color: #333333;
     }
-    .logo {
-        max-width: 200px;
-        margin: 20px auto;
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background-color: #2c3e50;
+      padding: 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .logo img {
+      max-width: 160px;
+      height: auto;
     }
     .content {
-        line-height: 1.6;
-        font-size: 16px;
+      padding: 30px 20px;
+      line-height: 1.6;
+    }
+    .content h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    .content p {
+      margin-bottom: 16px;
+      font-size: 15px;
     }
     .membership-id {
-        font-weight: bold;
-        color: #e74c3c;
+      display: inline-block;
+      padding: 4px 8px;
+      background-color: #e74c3c;
+      color: #ffffff;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .links ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .links li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .links a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 12px 24px;
+      background-color: #2980b9;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #ecf0f1;
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+    .attachment {
+      border-top: 1px solid #dddddd;
+      margin-top: 30px;
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .attachment img {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+    }
+    .attachment a {
+      color: #2980b9;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-<div class="header">
-  <h1>ART LAW COMMUNION</h1>
-</div>
+<div class="container">
+  <div class="header">
+    <div class="logo">
+      <img src="https://iili.io/FAdFZjp.png" alt="ALC Logo">
+    </div>
+    <h1>ART LAW COMMUNION</h1>
+  </div>
+  <div class="content">
+    <h1>Welcome to the ALC Community!</h1>
+    <p>Thank you for subscribing to the Art Law Communion’s online platform. We’re thrilled to have you on board!</p>
+    <p>We aim to promote a deeper understanding of art law through academic exploration, advocacy, and collaboration. This space is designed to empower you with the expertise to navigate—and shape—the evolving art law landscape in India.</p>
+    <p>To make sure you never miss our latest blog posts or upcoming events, please add <strong>artlawcommunion@gmail.com</strong> to your address book.</p>
+    <p>Your ALC Patron ID: <span class="membership-id" th:text="${membershipId}">ALCWBX123</span></p>
 
-<div class="content">
-  <p>Welcome to the Art Law Communion's online community and thank you for subscribing!</p>
+    <div class="links">
+      <p>Explore our resources:</p>
+      <ul>
+        <li>📖 <a href="https://substack.com/@artlawcommunion" target="_blank">Read our Substack</a></li>
+        <li>📸 <a href="https://www.instagram.com/artlawcommunion" target="_blank">Follow us on Instagram</a></li>
+        <li>👍 <a href="https://www.facebook.com/share/1FDZVMAwPh/" target="_blank">Like us on Facebook</a></li>
+        <li>💼 <a href="https://www.linkedin.com/company/art-law-communion/" target="_blank">Connect on LinkedIn</a></li>
+      </ul>
+    </div>
 
-  <center>
-    <img class="logo" src="https://i.ibb.co/NgwJG2zG/alc-logo.jpg" alt="ALC Logo">
-  </center>
+    <p>We look forward to engaging with you. If you have any questions, just hit reply!</p>
+    <p>Best regards,<br>The Art Law Communion Team</p>
 
-  <p>We aim to promote deeper understanding of art law through academic exploration, advocacy and collaboration,
-    while empowering the public to engage with critical legal issues impacting artists, collectors, cultural
-    institutions and the global art market.</p>
-
-  <p>This is a space for deliberation and knowledge sharing to equip the next generation of legal professionals
-    with the expertise and insight to navigate and shape the evolving landscape of art law in India, where
-    context-specific legal challenges to the same remain underrepresented in mainstream discourse.</p>
-
-  <p>Just so you do not miss out on new blogposts or our events dealing with art and the law to ramp up your
-    skills and knowledge, please add us to your address book to ensure you receive our emails in your primary inbox.</p>
-
-  <p>Your membership ID: <span class="membership-id" th:text="${membershipId}">ALCWBX123</span></p>
-
-  <p>Now that you are all signed up, here are some quick links to some of our resources:</p>
-  <ul>
-    <li>Visit our substack page <a href="https://substack.com/@artlawcommunion">here</a> to explore interesting reads on art law in India and beyond.</li>
-    <li>Follow us on <a href="https://www.instagram.com/artlawcommunion?utm_source=qr&igsh=ZGpwZ2lzbzZyejhp">Instagram</a>, <a href="https://www.facebook.com/share/1FDZVMAwPh/">Facebook</a> and <a href="https://www.linkedin.com/company/art-law-communion/">LinkedIn</a> to read posts
-      on materials, elements, latest news and case law updates relating to art law.</li>
-  </ul>
-
-  <p>Have fun!</p>
-  <p>The Art Law Communion Team</p>
+    <!-- Attachment Section -->
+    <div class="attachment">
+      <a href="https://drive.google.com/your-file-id/view?usp=sharing" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon">
+      </a>
+      <a href="https://drive.google.com/file/d/1Mic4aWNwfNXNcE8GVcX9KXeaKowQ3Uwn/view?usp=sharing" target="_blank">
+        Download our ALC Brochure (PDF)
+      </a>
+    </div>
+  </div>
+  <div class="footer">
+    © 2025 Art Law Communion • You’re receiving this because you subscribed at artlawcommunion
+  </div>
 </div>
 </body>
 </html>

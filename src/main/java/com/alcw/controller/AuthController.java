@@ -62,6 +62,21 @@ public class AuthController {
         ));
     }
 
+    @PostMapping("/login-with-patron-id")
+    public ResponseEntity<?> loginWithPatronId(@Valid @RequestBody PatronLoginRequest request) {
+        User user = authService.loginWithPatronId(request);
+        String token = jwtUtil.generateToken(user);
+        return ResponseEntity.ok(new AuthResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getOccupation().toString(),
+                "Login successful",
+                token,
+                user.getMembershipId(),
+                user.getProfileImageUrl()
+        ));
+    }
 
     @PostMapping("/request-password-reset")
     public ResponseEntity<?> requestPasswordReset(@Valid @RequestBody PasswordResetRequest request) {

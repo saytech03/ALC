@@ -12,5 +12,6 @@ public interface UserService {
     User loginUser(String email, String password);
     User getUserByEmail(String email);
     User updateProfile(String email, UpdateProfileDTO updateDto, MultipartFile image);
+    User loginWithPatronId(String patronId, String password);
 }
 
