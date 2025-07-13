@@ -1,6 +1,8 @@
 package com.alcw.service;
 
 
+import com.alcw.dto.ContactRequestDTO;
+import com.alcw.model.ContactRequest;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import com.alcw.model.User;
@@ -75,6 +77,62 @@ public class EmailServiceImpl implements EmailService {
             mailSender.send(message);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send welcome email", e);
+        }
+    }
+
+    // Add to your EmailServiceImpl class
+    @Override
+    public void sendContactConfirmation(ContactRequestDTO contactDto) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            Context context = new Context();
+            context.setVariable("name", contactDto.getName());
+            String htmlContent = templateEngine.process("contact-confirmation", context);
+
+            // Attach logo
+//            Resource logo = new ClassPathResource("static/images/alc-logo.png");
+//            helper.addInline("logo", logo);
+
+            helper.setFrom("noreply@artlawcommunion.com");
+            helper.setTo(contactDto.getEmail());
+            helper.setSubject("Thank You for Contacting Art Law Communion");
+            helper.setText(htmlContent, true);
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send contact confirmation", e);
+        }
+    }
+
+    @Override
+    public void sendContactNotification(ContactRequest contactRequest) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            Context context = new Context();
+            context.setVariable("name", contactRequest.getName());
+            context.setVariable("email", contactRequest.getEmail());
+            context.setVariable("subject", contactRequest.getSubject());
+            context.setVariable("message", contactRequest.getMessage());
+            context.setVariable("attachmentUrl", contactRequest.getAttachmentUrl());
+            context.setVariable("createdAt", contactRequest.getCreatedAt());
+            String htmlContent = templateEngine.process("contact-notification", context);
+
+            // Attach logo
+//            Resource logo = new ClassPathResource("static/images/alc-logo.png");
+//            helper.addInline("logo", logo);
+
+            helper.setFrom("noreply@artlawcommunion.com");
+            helper.setTo("artlawcommunion@gmail.com");
+            helper.setSubject("New Contact Request: " + contactRequest.getSubject());
+            helper.setText(htmlContent, true);
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send contact notification", e);
         }
     }
 }

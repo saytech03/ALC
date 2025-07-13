@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New Contact Request</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .container { max-width: 700px; margin: 0 auto; }
+    .header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+    .logo img { max-width: 150px; margin: 0 auto 20px; display: block; }
+    .content { padding: 30px; background: #f9f9f9; }
+    .details { background: white; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .detail-item { margin-bottom: 15px; }
+    .label { font-weight: bold; color: #2c3e50; }
+    .attachment { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+    .footer { text-align: center; padding: 20px; color: #777; font-size: 14px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <!-- Logo block replaced -->
+    <div class="logo">
+      <img src="https://i.postimg.cc/yxnXJMM5/alc-logo-modified.png" alt="ALC Logo">
+    </div>
+    <h1>New Contact Request Received</h1>
+  </div>
+
+  <div class="content">
+    <div class="details">
+      <div class="detail-item">
+        <span class="label">Name:</span>
+        <span th:text="${name}"></span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Email:</span>
+        <a th:href="'mailto:' + ${email}" th:text="${email}"></a>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Subject:</span>
+        <span th:text="${subject}"></span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Date:</span>
+        <span th:text="${#temporals.format(createdAt, 'MMMM dd, yyyy hh:mm a')}"></span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Message:</span>
+        <p th:text="${message}"></p>
+      </div>
+
+      <div th:if="${attachmentUrl}" class="attachment">
+        <span class="label">Attachment:</span>
+        <a th:href="${attachmentUrl}" target="_blank">View Attachment</a>
+      </div>
+    </div>
+
+    <p>Please respond to this inquiry within 24 hours.</p>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 Art Law Communion. All rights reserved.</p>
+    <p>This is an automated notification. Do not reply to this email.</p>
+  </div>
+</div>
+</body>
+</html>
