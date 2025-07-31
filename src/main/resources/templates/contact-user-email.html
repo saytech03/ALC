@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You for Contacting Us</title>
+    <style>
+        /* Styles similar to welcome email */
+        .header {
+            background: linear-gradient(135deg, #3a4a8c 0%, #2a3a7c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 25px;
+            line-height: 1.6;
+        }
+        .logo {
+            max-width: 120px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img src="https://i.postimg.cc/yxnXJMM5/alc-logo-modified.png" alt="ALC Logo" class="logo">
+    <h1>Thank You for Your <span th:text="${subject}"></span></h1>
+</div>
+
+<div class="content">
+    <p>Dear <span th:text="${name}"></span>,</p>
+
+    <p>We've received your <span th:text="${subject}"></span> and truly appreciate you taking the time to reach out to the Art Law Communion.</p>
+
+    <p>Our team will review your submission and get back to you within 3-5 business days. We're excited to explore this opportunity with you!</p>
+
+    <p>In the meantime, feel free to explore our latest articles and resources:</p>
+    <ul>
+        <li><a href="#">Blog Posts</a></li>
+        <li><a href="#">Upcoming Events</a></li>
+        <li><a href="#">Community Forum</a></li>
+    </ul>
+
+    <p>Best regards,<br>The Art Law Communion Team</p>
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@ package com.alcw.service;
 
 
 import com.alcw.dto.ContactRequestDTO;
-import com.alcw.model.ContactRequest;
+import com.alcw.model.ContactSubmission;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import com.alcw.model.User;
@@ -80,59 +80,53 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    // Add to your EmailServiceImpl class
+    // Add these methods to existing implementation
     @Override
-    public void sendContactConfirmation(ContactRequestDTO contactDto) {
+    public void sendUserConfirmation(String email, String name,
+                                     ContactSubmission.ContactSubject subject, String fileUrl) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             Context context = new Context();
-            context.setVariable("name", contactDto.getName());
-            String htmlContent = templateEngine.process("contact-confirmation", context);
+            context.setVariable("name", name);
+            context.setVariable("subject", subject.name());
+            String htmlContent = templateEngine.process("contact-user-email", context);
 
-            // Attach logo
-//            Resource logo = new ClassPathResource("static/images/alc-logo.png");
-//            helper.addInline("logo", logo);
-
-            helper.setFrom("noreply@artlawcommunion.com");
-            helper.setTo(contactDto.getEmail());
-            helper.setSubject("Thank You for Contacting Art Law Communion");
+            helper.setFrom("noreplyalcwb@gmail.com");
+            helper.setTo(email);
+            helper.setSubject("Thank you for your " + subject.name().toLowerCase());
             helper.setText(htmlContent, true);
 
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to send contact confirmation", e);
+            throw new RuntimeException("Failed to send confirmation email", e);
         }
     }
 
     @Override
-    public void sendContactNotification(ContactRequest contactRequest) {
+    public void sendAdminNotification(String adminEmail, String name, String userEmail,
+                                      ContactSubmission.ContactSubject subject, String messageContent, String fileUrl) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             Context context = new Context();
-            context.setVariable("name", contactRequest.getName());
-            context.setVariable("email", contactRequest.getEmail());
-            context.setVariable("subject", contactRequest.getSubject());
-            context.setVariable("message", contactRequest.getMessage());
-            context.setVariable("attachmentUrl", contactRequest.getAttachmentUrl());
-            context.setVariable("createdAt", contactRequest.getCreatedAt());
-            String htmlContent = templateEngine.process("contact-notification", context);
+            context.setVariable("name", name);
+            context.setVariable("email", userEmail);
+            context.setVariable("subject", subject.name());
+            context.setVariable("message", messageContent);
+            context.setVariable("fileUrl", fileUrl);
+            String htmlContent = templateEngine.process("contact-admin-email", context);
 
-            // Attach logo
-//            Resource logo = new ClassPathResource("static/images/alc-logo.png");
-//            helper.addInline("logo", logo);
-
-            helper.setFrom("noreply@artlawcommunion.com");
-            helper.setTo("artlawcommunion@gmail.com");
-            helper.setSubject("New Contact Request: " + contactRequest.getSubject());
+            helper.setFrom("noreplyalcwb@gmail.com");
+            helper.setTo(adminEmail);
+            helper.setSubject("New " + subject.name().toLowerCase() + " from " + name);
             helper.setText(htmlContent, true);
 
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to send contact notification", e);
+            throw new RuntimeException("Failed to send admin notification", e);
         }
     }
 }

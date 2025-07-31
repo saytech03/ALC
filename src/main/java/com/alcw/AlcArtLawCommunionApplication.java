@@ -13,5 +13,4 @@ public class AlcArtLawCommunionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AlcArtLawCommunionApplication.class, args);
 	}
-
 }
