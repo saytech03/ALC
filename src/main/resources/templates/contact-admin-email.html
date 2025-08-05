@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New Contact Submission</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header { background-color: #f0f0f0; padding: 20px; text-align: center; }
+    .content { padding: 20px; }
+    .details { margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h2>New <span th:text="${subject}"></span> Submission</h2>
+  </div>
+
+  <div class="content">
+    <p>You have received a new contact form submission:</p>
+
+    <div class="details">
+      <table>
+        <tr>
+          <th>Name</th>
+          <td th:text="${name}"></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td th:text="${email}"></td>
+        </tr>
+        <tr>
+          <th>Subject</th>
+          <td th:text="${subject}"></td>
+        </tr>
+        <tr>
+          <th>Message</th>
+          <td th:text="${message}"></td>
+        </tr>
+        <tr th:if="${fileUrl}">
+          <th>Attachment</th>
+          <td>
+            <a th:href="${fileUrl}" target="_blank">Download File</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="margin-top: 30px;">
+      <strong>Action Required:</strong><br>
+      Please review this submission in the admin dashboard and follow up with the submitter.
+    </p>
+  </div>
+</div>
+</body>
+</html>
