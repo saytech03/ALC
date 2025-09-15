@@ -5,6 +5,7 @@ package com.alcw.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -57,9 +58,14 @@ public class SecurityConfig {
                                 "/api/contact/**",
                                 "/actuator/**",
                                 "/error",
+                                "/api/blogs/**",
+                                "/api/admin/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/blogs").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/blogs/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/blogs/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
 
