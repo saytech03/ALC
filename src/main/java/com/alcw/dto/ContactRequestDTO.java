@@ -1,6 +1,5 @@
 package com.alcw.dto;
 
-
 import com.alcw.model.ContactSubmission;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -24,7 +23,5 @@ public class ContactRequestDTO {
     private String message;
 
     private MultipartFile blogFile;
-
-    @NotBlank(message = "Captcha token is required")
-    private String captchaToken;
+    // Removed captchaToken field
 }
