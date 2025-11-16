@@ -2,19 +2,11 @@ package com.alcw.service;
 
 import com.alcw.dto.ContactRequestDTO;
 import com.alcw.dto.ContactResponseDTO;
-import com.alcw.exception.InvalidCaptchaException;
 import com.alcw.model.ContactSubmission;
 import com.alcw.repository.ContactRepository;
-import com.alcw.service.CloudinaryService;
-import com.alcw.service.ContactService;
-import com.alcw.service.EmailService;
-import com.alcw.service.GoogleSheetsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -24,18 +16,13 @@ public class ContactServiceImpl implements ContactService {
     private final EmailService emailService;
     private final GoogleSheetsService googleSheetsService;
     private final ContactRepository contactRepository;
-    private final RestTemplate restTemplate;
-
-    @Value("${recaptcha.secret}")
-    private String recaptchaSecret;
 
     @Value("${spring.mail.username}")
     private String adminEmail;
 
     @Override
     public ContactResponseDTO processContactRequest(ContactRequestDTO request) {
-        // Verify CAPTCHA
-        verifyCaptcha(request.getCaptchaToken());
+        // CAPTCHA verification removed
 
         // Upload file if exists
         String fileUrl = null;
@@ -80,19 +67,5 @@ public class ContactServiceImpl implements ContactService {
         }
 
         return response;
-    }
-
-    private void verifyCaptcha(String token) {
-        String url = "https://www.google.com/recaptcha/api/siteverify?secret={secret}&response={response}";
-
-        Map<String, String> params = new HashMap<>();
-        params.put("secret", recaptchaSecret);
-        params.put("response", token);
-
-        Map<String, Object> response = restTemplate.getForObject(url, Map.class, params);
-
-        if (response == null || !(Boolean) response.get("success")) {
-            throw new InvalidCaptchaException("Invalid CAPTCHA verification");
-        }
     }
 }
